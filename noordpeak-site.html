@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noord Peak Advisory — Academic Web Presence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:       #0d1117;
+  --paper:     #f8f6f1;
+  --warm:      #efebe2;
+  --gold:      #9c7c38;
+  --gold-lt:   #f2e8d5;
+  --muted:     #6b6560;
+  --rule:      #ddd8cf;
+  --surface:   #ffffff;
+  --deep:      #141c26;
+  --deep2:     #1e2d40;
+  --cream:     #faf8f4;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ── GRAIN OVERLAY ── */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 999;
+  pointer-events: none; opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px;
+}
+
+/* ════════════════════════════════
+   NAV
+════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3.5rem;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--rule);
+  transition: background 0.3s;
+}
+
+.nav-brand {
+  display: flex; flex-direction: column; line-height: 1;
+}
+
+.nav-brand-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.05rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink);
+}
+
+.nav-brand-sub {
+  font-size: 0.58rem; font-weight: 500;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--gold); margin-top: 2px;
+}
+
+.nav-links {
+  display: flex; align-items: center; gap: 2.5rem;
+}
+
+.nav-links a {
+  text-decoration: none; font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+
+.nav-cta {
+  background: var(--ink) !important; color: var(--paper) !important;
+  padding: 9px 22px !important; border-radius: 3px;
+  letter-spacing: 0.12em !important;
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--deep2) !important; }
+
+/* ════════════════════════════════
+   HERO
+════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  background: var(--deep);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background grid lines */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+/* Gold diagonal accent */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 45%; height: 100%;
+  background: linear-gradient(135deg, transparent 40%, rgba(156,124,56,0.06) 100%);
+  pointer-events: none;
+}
+
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 10rem 4rem 6rem 3.5rem;
+  position: relative; z-index: 2;
+}
+
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2.5rem;
+  opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+}
+
+.eyebrow-rule { width: 28px; height: 1px; background: var(--gold); }
+
+.eyebrow-text {
+  font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);
+}
+
+.hero-h1 {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(2.6rem, 4.5vw, 4rem);
+  font-weight: 400; line-height: 1.12; color: #f0ece4;
+  margin-bottom: 2rem;
+  opacity: 0; animation: fadeUp 0.8s ease 0.35s forwards;
+}
+
+.hero-h1 em {
+  font-style: italic; color: var(--gold);
+}
+
+.hero-body {
+  font-size: 0.97rem; font-weight: 300; line-height: 1.9;
+  color: #8a9aa8; max-width: 46ch; margin-bottom: 3rem;
+  opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+}
+
+.hero-actions {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.8s ease 0.65s forwards;
+}
+
+.btn {
+  display: inline-block; text-decoration: none;
+  padding: 13px 30px; border-radius: 3px;
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  transition: all 0.25s; cursor: pointer; border: none;
+}
+
+.btn-gold { background: var(--gold); color: #fff; }
+.btn-gold:hover { background: #7d6229; }
+
+.btn-outline {
+  background: transparent; color: #f0ece4;
+  border: 1px solid rgba(240,236,228,0.25);
+}
+.btn-outline:hover { border-color: rgba(240,236,228,0.6); }
+
+/* Hero right — geometric composition */
+.hero-right {
+  display: flex; align-items: center; justify-content: center;
+  padding: 10rem 3.5rem 6rem 2rem;
+  position: relative; z-index: 2;
+}
+
+.hero-graphic {
+  position: relative; width: 340px; height: 400px;
+}
+
+/* Outer frame */
+.hg-frame {
+  position: absolute; inset: 0;
+  border: 1px solid rgba(156,124,56,0.25);
+  border-radius: 2px;
+}
+
+/* Inner offset box */
+.hg-inner {
+  position: absolute; top: 20px; left: 20px; right: -20px; bottom: -20px;
+  border: 1px solid rgba(240,236,228,0.07);
+  border-radius: 2px;
+}
+
+/* Peak SVG */
+.hg-peak {
+  position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%);
+}
+
+/* Floating label cards */
+.hg-card {
+  position: absolute; background: rgba(30,45,64,0.95);
+  border: 1px solid rgba(156,124,56,0.3);
+  border-radius: 4px; padding: 12px 18px;
+  animation: floatY 5s ease-in-out infinite;
+}
+.hg-card:nth-child(3) { animation-delay: -1.8s; }
+.hg-card:nth-child(4) { animation-delay: -3.5s; }
+
+.hg-card-1 { top: 12%; left: -18%; }
+.hg-card-2 { top: 38%; right: -14%; }
+.hg-card-3 { bottom: 14%; left: -8%; }
+
+.hg-card-val {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.5rem; font-weight: 500; color: var(--gold); line-height: 1;
+}
+.hg-card-lbl {
+  font-size: 0.65rem; font-weight: 400;
+  letter-spacing: 0.08em; color: #8a9aa8; margin-top: 3px;
+  white-space: nowrap;
+}
+
+@keyframes floatY {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-9px); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero divider */
+.hero-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* ════════════════════════════════
+   SECTIONS — shared
+════════════════════════════════ */
+.section { position: relative; }
+.section-inner { max-width: 1100px; margin: 0 auto; padding: 8rem 2rem; }
+
+.section-label {
+  display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.4rem;
+}
+.sl-rule { width: 20px; height: 1px; background: var(--gold); }
+.sl-text {
+  font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold);
+}
+
+h2 {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+  font-weight: 400; line-height: 1.2; color: var(--ink);
+}
+h2 em { font-style: italic; }
+
+/* ════════════════════════════════
+   PROBLEM STRIP
+════════════════════════════════ */
+.problem {
+  background: var(--warm);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.problem-inner {
+  max-width: 1100px; margin: 0 auto; padding: 7rem 2rem;
+  display: grid; grid-template-columns: 5fr 4fr; gap: 6rem; align-items: center;
+}
+
+.problem-quote {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-style: italic; font-weight: 400;
+  line-height: 1.55; color: var(--ink);
+}
+
+.problem-quote cite {
+  display: block; margin-top: 1.5rem;
+  font-family: 'Jost', sans-serif;
+  font-style: normal; font-size: 0.72rem;
+  font-weight: 500; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--gold);
+}
+
+.problem-points { display: flex; flex-direction: column; gap: 1.6rem; }
+
+.problem-point {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding-bottom: 1.6rem; border-bottom: 1px solid var(--rule);
+}
+.problem-point:last-child { border-bottom: none; padding-bottom: 0; }
+
+.pp-num {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.8rem; font-style: italic; color: var(--gold);
+  flex-shrink: 0; padding-top: 2px; width: 18px;
+}
+
+.pp-text {
+  font-size: 0.88rem; font-weight: 300;
+  line-height: 1.75; color: var(--muted);
+}
+
+/* ════════════════════════════════
+   SERVICES
+════════════════════════════════ */
+.services-header {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+  align-items: end; margin-bottom: 4rem;
+}
+
+.services-intro {
+  font-size: 0.95rem; font-weight: 300;
+  line-height: 1.85; color: var(--muted);
+}
+
+.services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--rule); border-radius: 6px; overflow: hidden;
+  background: var(--rule); gap: 1px;
+}
+
+.svc-card {
+  background: var(--surface); padding: 2.4rem 2.2rem;
+  transition: background 0.25s;
+  position: relative;
+}
+.svc-card:hover { background: var(--cream); }
+
+.svc-card.wide { grid-column: span 2; }
+
+.svc-num {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.7rem; font-style: italic;
+  color: var(--gold); margin-bottom: 1.4rem; display: block;
+}
+
+.svc-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+
+.svc-title {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.15rem; font-weight: 600;
+  color: var(--ink); margin-bottom: 0.7rem; line-height: 1.3;
+}
+
+.svc-desc {
+  font-size: 0.83rem; font-weight: 300;
+  line-height: 1.8; color: var(--muted);
+}
+
+.svc-pill {
+  display: inline-block; margin-top: 1.4rem;
+  font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); background: var(--gold-lt);
+  padding: 4px 12px; border-radius: 20px;
+}
+
+/* ════════════════════════════════
+   HOW IT WORKS
+════════════════════════════════ */
+.process-bg { background: var(--deep); }
+
+.process-bg h2 { color: #f0ece4; }
+.process-bg .sl-text { color: var(--gold); }
+
+.process-steps {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; margin-top: 4rem;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 6px; overflow: hidden;
+  background: rgba(255,255,255,0.04);
+}
+
+.process-step {
+  padding: 2.5rem 2rem;
+  border-right: 1px solid rgba(255,255,255,0.07);
+  position: relative;
+}
+.process-step:last-child { border-right: none; }
+
+.ps-num {
+  font-family: 'EB Garamond', serif;
+  font-size: 2rem; font-style: italic; font-weight: 400;
+  color: rgba(156,124,56,0.35); line-height: 1;
+  margin-bottom: 1.5rem; display: block;
+}
+
+.ps-title {
+  font-size: 0.88rem; font-weight: 600;
+  color: #d4cfc8; margin-bottom: 0.6rem;
+  letter-spacing: 0.03em;
+}
+
+.ps-desc {
+  font-size: 0.8rem; font-weight: 300;
+  line-height: 1.75; color: #5a6a78;
+}
+
+.ps-tag {
+  display: inline-block; margin-top: 1.2rem;
+  font-size: 0.6rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); border: 1px solid rgba(156,124,56,0.3);
+  padding: 3px 10px; border-radius: 20px;
+}
+
+/* ════════════════════════════════
+   TEAM
+════════════════════════════════ */
+.team-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  background: var(--rule); border: 1px solid var(--rule);
+  border-radius: 6px; overflow: hidden; margin-top: 4rem;
+}
+
+.team-card {
+  background: var(--surface); padding: 3rem 3.2rem;
+  display: grid; grid-template-columns: auto 1fr; gap: 2.5rem;
+  align-items: start;
+}
+
+.team-avatar {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--gold-lt);
+  border: 2px solid var(--rule);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'EB Garamond', serif;
+  font-size: 1.4rem; font-weight: 600;
+  color: var(--gold); flex-shrink: 0;
+  overflow: hidden;
+}
+
+.team-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-role {
+  font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.4rem;
+}
+
+.team-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.3rem; font-weight: 600;
+  color: var(--ink); margin-bottom: 0.5rem; line-height: 1.2;
+}
+
+.team-bio {
+  font-size: 0.83rem; font-weight: 300;
+  line-height: 1.8; color: var(--muted); margin-bottom: 1.2rem;
+}
+
+.team-quals { display: flex; flex-direction: column; gap: 0.3rem; }
+
+.team-qual {
+  display: flex; gap: 0.6rem; align-items: baseline;
+  font-size: 0.75rem; color: var(--muted); font-weight: 300;
+}
+.tq-dot { color: var(--gold); font-size: 0.5rem; flex-shrink: 0; margin-top: 4px; }
+
+/* ════════════════════════════════
+   PRICING
+════════════════════════════════ */
+.pricing-bg { background: var(--warm); border-top: 1px solid var(--rule); }
+
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem; margin-top: 4rem; align-items: start;
+}
+
+.price-card {
+  background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 6px; overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.price-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(13,17,23,0.09);
+}
+
+.price-card.featured {
+  border-color: var(--gold);
+  box-shadow: 0 8px 32px rgba(156,124,56,0.12);
+}
+
+.price-head {
+  padding: 2rem 2rem 1.6rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.price-card.featured .price-head {
+  background: var(--deep); border-bottom-color: rgba(255,255,255,0.07);
+}
+
+.price-badge {
+  display: inline-block; margin-bottom: 1rem;
+  font-size: 0.58rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); background: var(--gold-lt);
+  padding: 3px 10px; border-radius: 20px;
+}
+
+.price-card.featured .price-badge {
+  background: rgba(156,124,56,0.18);
+}
+
+.price-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.15rem; font-weight: 600;
+  color: var(--ink); margin-bottom: 0.3rem;
+}
+.price-card.featured .price-name { color: #f0ece4; }
+
+.price-tagline {
+  font-size: 0.78rem; font-weight: 300; color: var(--muted);
+}
+.price-card.featured .price-tagline { color: #5a6a78; }
+
+.price-body { padding: 2rem; }
+
+.price-amount {
+  font-family: 'EB Garamond', serif;
+  font-size: 2.4rem; font-weight: 600;
+  color: var(--ink); line-height: 1;
+}
+
+.price-period { font-size: 0.75rem; color: var(--muted); font-weight: 300; }
+
+.price-annual {
+  font-size: 0.75rem; color: var(--gold); font-weight: 500;
+  margin: 0.3rem 0 1.8rem;
+}
+
+.price-features {
+  list-style: none; display: flex;
+  flex-direction: column; gap: 0.8rem; margin-bottom: 2rem;
+}
+
+.price-features li {
+  display: flex; gap: 0.7rem; align-items: flex-start;
+  font-size: 0.82rem; font-weight: 300;
+  line-height: 1.5; color: var(--muted);
+}
+
+.pf-check { color: var(--gold); flex-shrink: 0; font-size: 0.7rem; margin-top: 2px; }
+
+.price-btn {
+  display: block; width: 100%; text-align: center;
+  text-decoration: none; padding: 12px;
+  border-radius: 4px; font-size: 0.75rem;
+  font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; transition: all 0.2s;
+}
+
+.price-btn-ghost {
+  border: 1px solid var(--rule); color: var(--ink);
+}
+.price-btn-ghost:hover { border-color: var(--ink); }
+
+.price-btn-gold {
+  background: var(--gold); color: #fff; border: 1px solid var(--gold);
+}
+.price-btn-gold:hover { background: #7d6229; border-color: #7d6229; }
+
+.price-note {
+  text-align: center; margin-top: 2rem;
+  font-size: 0.75rem; font-weight: 300; color: var(--muted);
+}
+
+/* ════════════════════════════════
+   CTA STRIP
+════════════════════════════════ */
+.cta-strip {
+  background: var(--deep);
+  padding: 7rem 2rem; text-align: center;
+  position: relative; overflow: hidden;
+}
+
+.cta-strip::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.cta-inner { max-width: 620px; margin: 0 auto; position: relative; z-index: 1; }
+
+.cta-strip h2 {
+  color: #f0ece4; margin-bottom: 1.2rem;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.cta-strip p {
+  font-size: 0.95rem; font-weight: 300;
+  color: #5a6a78; line-height: 1.85; margin-bottom: 2.8rem;
+}
+
+.cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* ════════════════════════════════
+   FOOTER
+════════════════════════════════ */
+footer {
+  background: var(--ink);
+  padding: 3rem 3.5rem 2rem;
+}
+
+.footer-top {
+  display: grid; grid-template-columns: 1fr auto auto auto;
+  gap: 4rem; padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  align-items: start;
+}
+
+.footer-brand-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #f0ece4; margin-bottom: 4px;
+}
+
+.footer-brand-sub {
+  font-size: 0.58rem; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--gold);
+}
+
+.footer-brand-tagline {
+  font-size: 0.78rem; font-weight: 300;
+  color: #3a4a58; margin-top: 0.8rem; max-width: 28ch; line-height: 1.6;
+}
+
+.footer-col-title {
+  font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1rem;
+}
+
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-links a {
+  text-decoration: none; font-size: 0.78rem;
+  font-weight: 300; color: #3a4a58;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: #f0ece4; }
+
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 1.8rem;
+  font-size: 0.7rem; font-weight: 300; color: #2a3a48;
+}
+
+.footer-socials { display: flex; gap: 1.2rem; }
+.footer-socials a {
+  text-decoration: none; font-size: 0.7rem;
+  font-weight: 500; letter-spacing: 0.08em;
+  color: #2a3a48; transition: color 0.2s;
+}
+.footer-socials a:hover { color: var(--gold); }
+
+/* ════════════════════════════════
+   SCROLL REVEAL
+════════════════════════════════ */
+.reveal {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.rd1 { transition-delay: 0.08s; }
+.rd2 { transition-delay: 0.16s; }
+.rd3 { transition-delay: 0.24s; }
+.rd4 { transition-delay: 0.32s; }
+
+/* ════════════════════════════════
+   RESPONSIVE
+════════════════════════════════ */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-right { display: none; }
+  .hero-left { padding: 9rem 1.8rem 5rem; }
+  .problem-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .services-header { grid-template-columns: 1fr; gap: 1.5rem; }
+  .services-grid { grid-template-columns: 1fr; }
+  .svc-card.wide { grid-column: span 1; }
+  .process-steps { grid-template-columns: 1fr 1fr; }
+  .process-step { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .team-grid { grid-template-columns: 1fr; }
+  .team-card { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  nav { padding: 0 1.5rem; }
+  .nav-links { gap: 1.2rem; }
+  .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+  .section-inner { padding: 5rem 1.5rem; }
+}
+
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .process-steps { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════ NAV ════ -->
+<nav>
+  <div class="nav-brand">
+    <div class="nav-brand-name">Noord Peak Advisory</div>
+    <div class="nav-brand-sub">Academic Web Presence</div>
+  </div>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#team">Our Team</a>
+    <a href="#pricing">Pricing</a>
+    <a href="https://calendly.com/boring91agency/30min" target="_blank" class="nav-cta">Book a Call</a>
+  </div>
+</nav>
+
+
+<!-- ════ HERO ════ -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="eyebrow-rule"></div>
+      <div class="eyebrow-text">Noord Peak Advisory · South Africa</div>
+    </div>
+
+    <h1 class="hero-h1">
+      Your scholarship deserves a presence as <em>distinguished</em> as your work.
+    </h1>
+
+    <p class="hero-body">
+      We build bespoke digital profiles exclusively for academics — unifying your scholarly 
+      identity and professional ventures into one authoritative, elegantly crafted web 
+      presence. Fully managed. No technical knowledge required.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#pricing" class="btn btn-gold">View Packages</a>
+      <a href="#services" class="btn btn-outline">What's Included</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-graphic">
+      <div class="hg-frame"></div>
+      <div class="hg-inner"></div>
+
+      <div class="hg-peak">
+        <svg width="180" height="140" viewBox="0 0 180 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="90,8 168,132 12,132" fill="rgba(156,124,56,0.07)" stroke="rgba(156,124,56,0.35)" stroke-width="1"/>
+          <polygon points="90,8 126,80 54,80" fill="rgba(156,124,56,0.1)" stroke="rgba(156,124,56,0.2)" stroke-width="0.5"/>
+          <line x1="90" y1="8" x2="90" y2="132" stroke="rgba(156,124,56,0.2)" stroke-width="0.8" stroke-dasharray="4 4"/>
+          <line x1="12" y1="132" x2="168" y2="132" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+          <circle cx="90" cy="8" r="4" fill="#9c7c38"/>
+          <circle cx="90" cy="8" r="9" stroke="#9c7c38" stroke-width="0.8" fill="none" opacity="0.4"/>
+          <text x="97" y="6" font-family="Georgia, serif" font-size="8" fill="#9c7c38" font-style="italic">Noord Peak</text>
+        </svg>
+      </div>
+
+      <div class="hg-card hg-card-1">
+        <div class="hg-card-val">2-in-1</div>
+        <div class="hg-card-lbl">Academic + Foundation profile</div>
+      </div>
+      <div class="hg-card hg-card-2">
+        <div class="hg-card-val">48h</div>
+        <div class="hg-card-lbl">Content update turnaround</div>
+      </div>
+      <div class="hg-card hg-card-3">
+        <div class="hg-card-val">100%</div>
+        <div class="hg-card-lbl">Managed — you do nothing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hero-divider"></div>
+
+
+<!-- ════ THE PROBLEM ════ -->
+<section class="problem">
+  <div class="problem-inner">
+    <div class="reveal">
+      <div class="problem-quote">
+        "Most academics have a university profile page they didn't write, a LinkedIn they've neglected, and a foundation website that looks like it hasn't been touched since 2009."
+        <cite>— The gap Noord Peak Advisory was built to close</cite>
+      </div>
+    </div>
+
+    <div class="problem-points">
+      <div class="problem-point reveal rd1">
+        <div class="pp-num">i</div>
+        <div class="pp-text">Your research and your foundation speak to entirely different audiences — but you only have time to manage one presence, if that.</div>
+      </div>
+      <div class="problem-point reveal rd2">
+        <div class="pp-num">ii</div>
+        <div class="pp-text">University-provided profile pages are rigid, generic, and buried inside institutional systems you cannot control or update easily.</div>
+      </div>
+      <div class="problem-point reveal rd3">
+        <div class="pp-num">iii</div>
+        <div class="pp-text">Building and maintaining a professional site requires time and technical skill most academics neither have nor should need to develop.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ SERVICES ════ -->
+<section class="section" id="services">
+  <div class="section-inner">
+    <div class="services-header">
+      <div class="reveal">
+        <div class="section-label">
+          <div class="sl-rule"></div>
+          <div class="sl-text">What We Do</div>
+        </div>
+        <h2>Everything your digital presence needs — <em>handled.</em></h2>
+      </div>
+      <p class="services-intro reveal rd1">
+        We handle the entire process from concept to live site — and keep it current long after launch. 
+        Every service is delivered with the precision and discretion your academic standing demands.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      <div class="svc-card reveal">
+        <span class="svc-num">01</span>
+        <div class="svc-icon">🖥</div>
+        <div class="svc-title">Dual-Profile Website</div>
+        <div class="svc-desc">One refined site, two complete identities. Your academic profile — publications, research areas, teaching — and your foundation or consultancy, each with their own design language, unified under your name. Visitors switch between them with a single click.</div>
+        <span class="svc-pill">Core Service</span>
+      </div>
+
+      <div class="svc-card reveal rd1">
+        <span class="svc-num">02</span>
+        <div class="svc-icon">🌐</div>
+        <div class="svc-title">Domain & Hosting Management</div>
+        <div class="svc-desc">We register your domain (e.g. drjanesmith.co.za), configure secure hosting, install SSL certificates, and handle every technical detail. You receive a professional address and never log in to a server.</div>
+        <span class="svc-pill">Fully Managed</span>
+      </div>
+
+      <div class="svc-card reveal rd2">
+        <span class="svc-num">03</span>
+        <div class="svc-icon">✏️</div>
+        <div class="svc-title">Ongoing Updates & Maintenance</div>
+        <div class="svc-desc">New publication, new award, new lecture series? Simply email us and it is updated within 48 hours. Annual plan subscribers receive unlimited content updates — your site stays current without you touching it.</div>
+        <span class="svc-pill">Annual Plan</span>
+      </div>
+
+      <div class="svc-card wide reveal">
+        <span class="svc-num">04</span>
+        <div class="svc-icon">🏛</div>
+        <div class="svc-title">Foundation & Business Profile Setup</div>
+        <div class="svc-desc">We design and build the foundation or business-facing side of your site in full — mission statement, key initiatives, impact statistics, latest news, and calls to action for donors, fellowship applicants, or business partners. Visually distinct from your academic profile, yet unmistakably the same person.</div>
+        <span class="svc-pill">Included in All Plans</span>
+      </div>
+
+      <div class="svc-card reveal rd1">
+        <span class="svc-num">05</span>
+        <div class="svc-icon">💼</div>
+        <div class="svc-title">LinkedIn Profile Refresh</div>
+        <div class="svc-desc">A full rewrite of your LinkedIn to reflect both your academic standing and your external ventures — consistent language, a commanding summary, and formatting that commands respect from both scholars and executives.</div>
+        <span class="svc-pill">Add-on Available</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ PROCESS ════ -->
+<section class="section process-bg" id="process">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">
+        <div class="sl-rule"></div>
+        <div class="sl-text">How It Works</div>
+      </div>
+      <h2>From first conversation to <em>live site</em> in days.</h2>
+    </div>
+
+    <div class="process-steps">
+      <div class="process-step reveal rd1">
+        <span class="ps-num">i</span>
+        <div class="ps-title">Discovery Call</div>
+        <div class="ps-desc">A focused 30-minute conversation to understand your academic work, your external ventures, and how you want to be perceived by each audience.</div>
+        <span class="ps-tag">30 Minutes</span>
+      </div>
+      <div class="process-step reveal rd2">
+        <span class="ps-num">ii</span>
+        <div class="ps-title">We Design & Build</div>
+        <div class="ps-desc">We design your dual-profile site, write the copy structure, register your domain, configure hosting, and build everything to your approval.</div>
+        <span class="ps-tag">3–5 Working Days</span>
+      </div>
+      <div class="process-step reveal rd3">
+        <span class="ps-num">iii</span>
+        <div class="ps-title">You Review & Approve</div>
+        <div class="ps-desc">We share a live preview link. One round of revisions is included. Once you're satisfied, we make your domain live — typically within hours.</div>
+        <span class="ps-tag">1 Round of Revisions</span>
+      </div>
+      <div class="process-step reveal rd4">
+        <span class="ps-num">iv</span>
+        <div class="ps-title">We Maintain It</div>
+        <div class="ps-desc">Annual subscribers simply email updates. We handle domain renewals, security certificates, content changes, and everything else — indefinitely.</div>
+        <span class="ps-tag">Ongoing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ TEAM ════ -->
+<section class="section" id="team">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">
+        <div class="sl-rule"></div>
+        <div class="sl-text">Our Team</div>
+      </div>
+      <h2>Built by people who understand <em>both worlds.</em></h2>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-card reveal rd1">
+        <div class="team-avatar"><img src="resources/sino.png" alt="Sinovuyo"></div>
+        <div>
+          <div class="team-role">Co-Founder & Lead Consultant · CEO</div>
+          <div class="team-name">Sinovuyo</div>
+          <p class="team-bio">
+            Sinovuyo brings deep expertise in business administration, leadership development, 
+            and client strategy. She leads every client engagement personally — ensuring 
+            each academic's presence reflects their professional standing with precision 
+            and authority. Her background in account management and organisational leadership 
+            means she understands how institutions think and what credibility looks like.
+          </p>
+          <div class="team-quals">
+            <div class="team-qual"><span class="tq-dot">◆</span> Postgraduate Diploma in Business Administration</div>
+            <div class="team-qual"><span class="tq-dot">◆</span> Advanced Diploma in Business Administration</div>
+            <div class="team-qual"><span class="tq-dot">◆</span> National Diploma in Retail Business Management</div>
+            <div class="team-qual"><span class="tq-dot">◆</span> Master's in Organisational Leadership (in progress)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card reveal rd2">
+        <div class="team-avatar"><img src="resources/duke.png" alt="Duke"></div>
+        <div>
+          <div class="team-role">Co-Founder · Chief Consulting Officer</div>
+          <div class="team-name">Duke</div>
+          <p class="team-bio">
+            Duke leads the design and technical delivery of every site we build. 
+            His background spans event management, hospitality, and front-end development — 
+            giving him both the creative sensibility to produce refined, elegant interfaces 
+            and the logistical discipline to deliver on time. He brings a calm, 
+            solutions-focused approach to every project and has a particular eye for 
+            the kind of institutional gravitas that resonates with academic audiences.
+          </p>
+          <div class="team-quals">
+            <div class="team-qual"><span class="tq-dot">◆</span> Administration Information Management (current)</div>
+            <div class="team-qual"><span class="tq-dot">◆</span> Front-End Development — HTML, CSS, JavaScript</div>
+            <div class="team-qual"><span class="tq-dot">◆</span> Event Management & Hospitality background</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ PRICING ════ -->
+<section class="section pricing-bg" id="pricing">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">
+        <div class="sl-rule"></div>
+        <div class="sl-text">Pricing</div>
+      </div>
+      <h2>Transparent pricing. <em>No surprises.</em></h2>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- Essential -->
+      <div class="price-card reveal rd1">
+        <div class="price-head">
+          <div class="price-badge">Essential</div>
+          <div class="price-name">Academic Profile</div>
+          <div class="price-tagline">A clean, authoritative single academic profile.</div>
+        </div>
+        <div class="price-body">
+          <div style="display:flex; align-items:baseline; gap:0.3rem;">
+            <div class="price-amount">R8,500</div>
+            <div class="price-period">once-off</div>
+          </div>
+          <div class="price-annual">+ R2,500 / year — domain, hosting & renewals</div>
+          <ul class="price-features">
+            <li><span class="pf-check">◆</span>Single-profile site (academic)</li>
+            <li><span class="pf-check">◆</span>Publications, research & teaching sections</li>
+            <li><span class="pf-check">◆</span>Domain registration & configuration</li>
+            <li><span class="pf-check">◆</span>Hosting & SSL certificate setup</li>
+            <li><span class="pf-check">◆</span>1 round of revisions</li>
+            <li><span class="pf-check">◆</span>Annual domain & hosting renewal managed</li>
+          </ul>
+          <a href="https://calendly.com/boring91agency/30min" target="_blank" class="price-btn price-btn-ghost">Book a Call</a>
+        </div>
+      </div>
+
+      <!-- Signature — featured -->
+      <div class="price-card featured reveal rd2">
+        <div class="price-head">
+          <div class="price-badge">Most Popular</div>
+          <div class="price-name">Signature Dual Profile</div>
+          <div class="price-tagline">One site, two complete identities. The full Noord Peak experience.</div>
+        </div>
+        <div class="price-body">
+          <div style="display:flex; align-items:baseline; gap:0.3rem;">
+            <div class="price-amount">R15,500</div>
+            <div class="price-period">once-off</div>
+          </div>
+          <div class="price-annual">+ R4,200 / year — includes unlimited content updates</div>
+          <ul class="price-features">
+            <li><span class="pf-check">◆</span>Dual-profile site (academic + foundation/business)</li>
+            <li><span class="pf-check">◆</span>Custom design language for each profile</li>
+            <li><span class="pf-check">◆</span>Domain, hosting & SSL — fully managed</li>
+            <li><span class="pf-check">◆</span>Foundation: mission, initiatives, impact & news</li>
+            <li><span class="pf-check">◆</span>Unlimited content updates (48h turnaround)</li>
+            <li><span class="pf-check">◆</span>Annual renewals handled on your behalf</li>
+            <li><span class="pf-check">◆</span>Priority email support</li>
+          </ul>
+          <a href="https://calendly.com/boring91agency/30min" target="_blank" class="price-btn price-btn-gold">Book a Call</a>
+        </div>
+      </div>
+
+      <!-- Full Presence -->
+      <div class="price-card reveal rd3">
+        <div class="price-head">
+          <div class="price-badge">Premier</div>
+          <div class="price-name">Full Presence Suite</div>
+          <div class="price-tagline">Your complete digital identity — web, LinkedIn, and beyond.</div>
+        </div>
+        <div class="price-body">
+          <div style="display:flex; align-items:baseline; gap:0.3rem;">
+            <div class="price-amount">R22,000</div>
+            <div class="price-period">once-off</div>
+          </div>
+          <div class="price-annual">+ R6,000 / year — all-inclusive</div>
+          <ul class="price-features">
+            <li><span class="pf-check">◆</span>Everything in Signature</li>
+            <li><span class="pf-check">◆</span>LinkedIn profile full rewrite</li>
+            <li><span class="pf-check">◆</span>Professional bio — short & long form</li>
+            <li><span class="pf-check">◆</span>2 rounds of revisions</li>
+            <li><span class="pf-check">◆</span>Google search optimisation (SEO)</li>
+            <li><span class="pf-check">◆</span>Quarterly site review call</li>
+            <li><span class="pf-check">◆</span>Same-day update turnaround</li>
+          </ul>
+          <a href="https://calendly.com/boring91agency/30min" target="_blank" class="price-btn price-btn-ghost">Book a Call</a>
+        </div>
+      </div>
+
+    </div>
+    <p class="price-note">All prices in ZAR including VAT. LinkedIn refresh also available as a standalone add-on at R3,500. Not certain which plan suits you? Book a no-obligation discovery call and we'll advise honestly.</p>
+  </div>
+</section>
+
+
+<!-- ════ CTA ════ -->
+<section class="cta-strip">
+  <div class="cta-inner">
+    <div class="section-label" style="justify-content:center; margin-bottom:1.4rem;">
+      <div class="sl-rule"></div>
+      <div class="sl-text" style="color:#3a4a58;">Get in Touch</div>
+      <div class="sl-rule"></div>
+    </div>
+    <h2>Ready to take your presence to the <em>peak?</em></h2>
+    <p>
+      Book a free 30-minute discovery call. No commitment, no technical jargon — 
+      just an honest conversation about what your digital presence should look like 
+      and how we can build it for you.
+    </p>
+    <div class="cta-actions">
+      <a href="https://calendly.com/boring91agency/30min" target="_blank" class="btn btn-gold">Book a Discovery Call</a>
+      <a href="https://wa.me/+27793203314" target="_blank" class="btn btn-outline">WhatsApp Us</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-name">Noord Peak Advisory</div>
+      <div class="footer-brand-sub">Academic Web Presence</div>
+      <div class="footer-brand-tagline">Bespoke digital profiles for academics who demand distinction.</div>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">Dual-Profile Website</a></li>
+        <li><a href="#services">Domain & Hosting</a></li>
+        <li><a href="#services">Ongoing Maintenance</a></li>
+        <li><a href="#services">Foundation Profile</a></li>
+        <li><a href="#services">LinkedIn Refresh</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#team">Our Team</a></li>
+        <li><a href="#process">How It Works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="https://calendly.com/boring91agency/30min" target="_blank">Book a Call</a></li>
+        <li><a href="https://wa.me/+27793203314" target="_blank">WhatsApp</a></li>
+        <li><a href="https://www.facebook.com/NoordPeakAdvisory" target="_blank">Facebook</a></li>
+        <li><a href="https://www.linkedin.com/company/northpeak-advisory-za" target="_blank">LinkedIn</a></li>
+        <li><a href="https://www.instagram.com/noord_peak_advisory/" target="_blank">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div>© 2025 Noord Peak Advisory. All rights reserved. South Africa.</div>
+    <div class="footer-socials">
+      <a href="https://www.linkedin.com/company/northpeak-advisory-za" target="_blank">LinkedIn</a>
+      <a href="https://www.instagram.com/noord_peak_advisory/" target="_blank">Instagram</a>
+      <a href="https://www.facebook.com/NoordPeakAdvisory" target="_blank">Facebook</a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
